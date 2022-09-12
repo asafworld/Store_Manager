@@ -2,18 +2,18 @@ const { getProducts, getProductsByID } = require('../models/SQLqueries/GETproduc
 
 async function allProductsReturn() {
   const [result] = await getProducts();
-  if (result) {
-    return result;
+  if (result === [] || result === undefined || result === null) {
+    return 'ERROR';
   } 
-  return 'ERROR';
+  return result;
 }
 
 async function productByIdReturn(id) {
   const [[result]] = await getProductsByID(id);
-  if (result) {
-    return result;
+  if (result === [] || result === undefined || result === null) {
+    return 'ERROR';
   }
-  return 'ERROR';
+  return result;
 }
 
 module.exports = {
