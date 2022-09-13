@@ -3,30 +3,23 @@ const { getId } = require('../models/SQLqueries/GETid.model');
 
 async function lastId() {
   const id = await getId();
-  console.log(id.length);
   const newId = id.length + 1;
   return newId;
 }
 
 async function insertCheck(saleId, productId, quantity) {
-  console.log('entrou no insertCheck');
   const [insertReturn] = await postSales(saleId, productId, quantity);
   if (insertReturn.affectedRows <= 0) {
-    console.log('retornou false no insertCheck');
     return false;
   }
-  console.log('retornou true no insertCheck');
   return true;
 }
 
 async function dateCheck(saleId) {
-  console.log('entrou no dateCheck');
   const [insertReturn] = await postSalesDate(saleId);
   if (insertReturn.affectedRows <= 0) {
-    console.log('retornou false no dateCheck');
     return false;
   }
-  console.log('retornou true no dateCheck');
   return true;
 }
 
