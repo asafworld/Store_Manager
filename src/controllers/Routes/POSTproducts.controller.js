@@ -1,6 +1,6 @@
 const express = require('express');
 const { postProductCallback } = require('../callbacks/POSTproducts.callback');
-const { checkBody, checkName } = require('../../middlewares/POSTproducts.middleware');
+const { checkBody, checkName } = require('../../middlewares/GENERAL.middleware');
 
 const router = express.Router();
 
