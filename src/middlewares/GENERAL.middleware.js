@@ -1,4 +1,5 @@
 const { getProducts } = require('../models/SQLqueries/GETproducts.model');
+const { getSalesInfo } = require('../models/SQLqueries/GETsales.model');
 
 function checkBody(req, res, next) {
   const { body } = req;
@@ -32,8 +33,21 @@ async function checkId(req, res, next) {
   return res.status(404).json({ message: 'Product not found' });
 }
 
+async function checkSaleId(req, res, next) {
+  const id = Number(req.params.id);
+  console.log('ID ------->', id);
+  const idArr = await getSalesInfo();
+  console.log(idArr);
+  const check = idArr.some((prod) => prod.id === id);
+  if (check) {
+    return next();
+  }
+  return res.status(404).json({ message: 'Sale not found' });
+}
+
 module.exports = {
   checkName,
   checkBody,
   checkId,
+  checkSaleId,
 };

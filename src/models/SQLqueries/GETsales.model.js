@@ -7,7 +7,6 @@ async function getSales() {
     INNER JOIN StoreManager.sales_products AS sp ON s.id = sp.sale_id
     ORDER BY s.id ASC;;`,
   );
-  console.log(sales);
   return sales;
 }
 
@@ -19,11 +18,18 @@ async function getSalesById(id) {
       WHERE s.id = ?
       ORDER BY s.id ASC;`, [id],
   );
-  console.log(sales);
   return sales;
+}
+
+async function getSalesInfo() {
+  const [allSales] = await connection.execute(
+    'SELECT * FROM StoreManager.sales',
+  );
+  return allSales;
 }
 
 module.exports = {
   getSales,
   getSalesById,
+  getSalesInfo,
 };
